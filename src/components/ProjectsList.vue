@@ -14,10 +14,10 @@
     </v-card-title>
     <v-data-table
       :headers="headers"
-      :items="list"
+      :items="fixedList"
       class="custom mb-4"
       :loading="loadProj"
-      :item-class="getClass"
+      item-class="class"
       :disable-sort="true"
       :page.sync="page"
       :items-per-page="itemsPerPage"
@@ -92,19 +92,6 @@ export default {
     reset() {
       this.savedParams = {};
     },
-    getClass(item) {
-      return item.status.value === 1
-        ? "green--text"
-        : item.status.value === 0
-        ? "shades--text"
-        : item.status.value === 2
-        ? "primary--text"
-        : item.status.value === 3
-        ? "grey--text"
-        : item.status.value === 4
-        ? "deep-orange--text"
-        : "";
-    },
     getList() {
       this.loadProj = true;
       api
@@ -152,6 +139,27 @@ export default {
     this.getList();
   },
   computed: {
+    fixedList() {
+      return (
+        this.list.map((i) => {
+          return {
+            ...i,
+            class:
+              i.status.value === 1
+                ? "green--text"
+                : i.status.value === 0
+                ? "shades--text"
+                : i.status.value === 2
+                ? "primary--text"
+                : i.status.value === 3
+                ? "grey--text"
+                : i.status.value === 4
+                ? "deep-orange--text"
+                : "",
+          };
+        }) || []
+      );
+    },
     totalRecords() {
       return this.allPages;
     },

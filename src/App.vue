@@ -1,15 +1,15 @@
 <template>
   <v-container>
-    <v-app class="pa-6">
-      <project-list/>
+    <v-app>
+      <project-list />
     </v-app>
   </v-container>
 </template>
 
 <script>
-import ProjectList from './components/ProjectsList.vue';
+import ProjectList from "./components/ProjectsList.vue";
 export default {
-  name: 'App',
+  name: "App",
 
   data: () => ({
     //
